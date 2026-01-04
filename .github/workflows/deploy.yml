@@ -9,7 +9,7 @@ on:
 
 env:
   # 환경 변수들 지정...
-  IMAGE_NAME: rkfladldy/auth-backend
+  IMAGE_NAME: galim1209/auth-backend
   # Github container registry
   REGISTRY: ghcr.io
 
