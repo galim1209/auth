@@ -89,7 +89,7 @@ jobs:
           port: 22
           source: "docker-compose.prod.yml"
           target: "/home/${{ secrets.LIGHTSAIL_USER }}/auth"
-
+      #
       # 9 단계: LightSail 서버에 SSH로 접속하여 배포
       - name: LightSail 서버 배포
         uses: appleboy/ssh-action@v1.0.0
