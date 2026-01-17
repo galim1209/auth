@@ -137,5 +137,6 @@ jobs:
             sudo docker image prune -af
             
             # 8. 배포 결과 확인하기 
-            sudo docker compose -d docker-compose.prod.yml ps 
+            sudo docker compose -f docker-compose.prod.yml ps
+ 
 
