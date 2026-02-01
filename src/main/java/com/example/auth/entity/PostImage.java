@@ -1,5 +1,6 @@
 package com.example.auth.entity;
 
+import com.example.auth.dto.post.PostImageResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,4 +56,15 @@ public class PostImage {
     @UpdateTimestamp    // Hibernate가 자동으로 업데이트 시간을 수정해줌
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public static PostImageResponse toDto(PostImage image){
+        PostImageResponse res = new PostImageResponse();
+        res.setId(image.getId());
+        res.setImageUrl(image.getImageUrl());
+        res.setThumbnailUrl(image.getThumbnailUrl());
+        res.setSortOrder(image.getSortOrder());
+        res.setWidth(image.getWidth());
+        res.setHeight(image.getHeight());
+        res.setMediaType(image.getMediaType());
+    }
 }

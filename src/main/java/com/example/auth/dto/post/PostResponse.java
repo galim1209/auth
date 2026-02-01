@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostRepository {
+public class PostResponse {
     private Long id;
     private String content;
     private Visibility visibility;

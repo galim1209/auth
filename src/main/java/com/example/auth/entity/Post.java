@@ -1,5 +1,7 @@
 package com.example.auth.entity;
 
+import com.example.auth.dto.post.PostAuthorResponse;
+import com.example.auth.dto.post.PostResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "post", indexes = {
@@ -102,6 +105,25 @@ public class Post {
     // 삭제됨 표시
     public void softDelete(){
         isDeleted = true;
+    }
+
+    // Entity -> DTO
+    public static PostResponse toDto(Post post, boolean isLiked, boolean isBookmarked){
+        PostResponse res = new PostResponse();
+        res.setId(post.getId());
+        res.setContent(post.getContent());
+        res.setVisibility(post.getVisibility());
+        res.setLikeCount(post.getLikeCount());
+        res.setCommentCount(post.getCommentCount());
+        res.setViewCount(post.getViewCount());
+        res.setAuthor(PostAuthorResponse.from(post.getUser()));
+        res.setImages(post.getImages().stream().map(PostImage::toDto).collect(Collectors.toList()));
+        res.setIsLiked(isLiked);
+        // bookmark todo
+        res.setCreatedAt(post.getCreatedAt());
+        res.setUpdatedAt(post.getUpdatedAt());
+
+        return res;
     }
 }
 
