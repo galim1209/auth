@@ -53,19 +53,29 @@ public class PostService {
         Long postId = savedPost.getId();
 
         // 이미지를 이미지 테이블에 저장하고 링킹
+        List<PostImage> imageList = null;
         if (images != null && !images.isEmpty()){
-            savePostImages(savedPost, images);
+            imageList = savePostImages(savedPost, images);
         }
 
         // 게시글과 함께 저장된 이미지 링크들의 정보가 있는 Post Entity 를 다시 불러와야 함
-        savedPost = postRepository.findByIdAndIsDeletesFalse(postId).orElseThrow(
+        savedPost = postRepository.findByIdWithUserAndImages(postId).orElseThrow(
                 ()->new RuntimeException("게시글이 없습니다")
         );
+
+        if (imageList!=null) {
+            Post finalSavedPost = savedPost;
+            for (PostImage postImage : imageList) {
+                savedPost.addImage(postImage);
+            }
+        }
+        System.out.println("가져온 게시글의 이미지 개수 " + savedPost.getImages().size());
 
         return Post.toDto(savedPost, false, false);
     }
 
-    private void savePostImages(Post post, List<MultipartFile> images){
+    @Transactional
+    private List<PostImage> savePostImages(Post post, List<MultipartFile> images){
         List<PostImage> postImages = new ArrayList<>();
 
         for(int i = 0; i<images.size(); i++){
@@ -86,6 +96,6 @@ public class PostService {
         }
 
         // Image 일관 저장
-        postImageRepository.saveAll(postImages);
+        return postImageRepository.saveAll(postImages);
     }
 }
