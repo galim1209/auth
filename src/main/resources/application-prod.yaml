@@ -58,3 +58,4 @@ spring:
           time_zone: Asia/Seoul
         order_inserts: true
         order_updates: true
+

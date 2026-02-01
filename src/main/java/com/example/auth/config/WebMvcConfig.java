@@ -25,3 +25,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations(absoluteUploadPath);
     }
 }
+
+
+// cursor ai, claude code
+
+// 이걸 이용해서 프론트엔드 제작 가이드 문서를 만들어줘
+// front-end-guide.md ---> 프론트엔드 프로젝트 폴더로 복사
+// vscode 에서 ctrl+j 터미널 -> claude
+
+// @front-end-guide.md 이걸 이용하여 사용자 프로필 수정 페이지를 만들어주고
+// 로그인 사용자명에 버튼을 생성하여 해당 페이지로 이동하고 테스트할 수 있도록 해줘

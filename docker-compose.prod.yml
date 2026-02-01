@@ -3,7 +3,7 @@
 services:
   # mysql 데이터베이스 서비스
   mysql:
-    # 베이스가 되는 이미지 버전을 명시
+    # 배이스가 되는 이미지 버전을 명시
     image: mysql:8
     # 컨테이너 이름
     container_name: prod-mysql
@@ -22,17 +22,17 @@ services:
       # 시간대 설정
       TZ: Asia/Seoul
 
-    # 볼륨설정하여 데이터를 영구 저장하도록 설정
+    # 볼륨설정하여 데이터를 영구저장하도록 설정
     volumes:
       - prod-mysql-data:/var/lib/mysql
 
-    # 독립적인 서비스 네트워크를 구성하고 여기에 연결함!
+    # 독집적인 서비스 네트워크를 구성하고 여기에 연결함
     networks:
       - prod-auth-network
 
     # 헬스 체크
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}" ]
+      test: ["CMD", "mysqladmin","ping","-h","localhost","-u","root","-p${DB_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -42,25 +42,25 @@ services:
     logging:
       driver: "json-file"
       options:
-        # 로그파일 최대 크기 10MBytes
+        #로그 파일 최대 킉 10MByte
         max-size: "10m"
         # 로그파일 개수 : 최대 3개까지만, 오래된 파일은 자동으로 삭제됨
         max-file: "3"
 
     # 재시작 정책
     # unless-stopped : 수동으로 중지하지 않는한 항상 재시작하도록 설정
-    # 서버 부팅시 자동으로 재시작, 컨테이너 크래시 시 자동으로 재시작
+    # 서버 부팅시 자동으로 재시작 , 컨테이너 크래시 시 자동으로 재시작
     # 사용자 조작으로 STOP했을때는 재시작하지 않음
     restart: unless-stopped
 
 
-  # 백앤드 서비스
+  # 백엔드 서비스
   auth:
     build:
       context: .
       dockerfile: Dockerfile
 
-    image: ghcr.io/icesnake72/auth-backend:latest
+    image: ghcr.io/galim1209/auth-backend:latest
     container_name: prod-auth
 
     ports:
@@ -75,11 +75,11 @@ services:
       JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION}
       JWT_REFRESH_TOKEN_EXPIRATION: ${JWT_REFRESH_TOKEN_EXPIRATION}
 
-      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID}
+      KAKAO_CLIENT_ID:  ${KAKAO_CLIENT_ID}
       KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET}
       KAKAO_REDIRECT_URI: ${KAKAO_REDIRECT_URI}
 
-      # FRONT-END URL 설정
+      # FRONT_ENT_URL 설정
       FRONTEND_URL: ${FRONTEND_URL}
 
       # Spring profile 정보(개발 전용, 로컬 환경에서 테스트)
@@ -103,25 +103,25 @@ services:
     logging:
       driver: "json-file"
       options:
-        # 로그파일 최대 크기 10MBytes
+        #로그 파일 최대 킉 10MByte
         max-size: "10m"
         # 로그파일 개수 : 최대 3개까지만, 오래된 파일은 자동으로 삭제됨
         max-file: "3"
 
-# 기존 prod-auth-network에 연결함
+
+
+# 기존 auth-network에 연결함
 networks:
   prod-auth-network:
     driver: bridge
     external: true
     name: prod-auth-network
 
-
 # 볼륨 설정
 volumes:
   prod-mysql-data:
     driver: local
     name: prod-mysql-data
-
 
 
 ######################################################
