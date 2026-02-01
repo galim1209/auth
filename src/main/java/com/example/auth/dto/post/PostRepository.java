@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,10 +18,10 @@ public class PostRepository {
     private Integer likeCount;
     private Integer commentCount;
     private Integer ViewCount;
-    private Long userId;
+    private PostAuthorResponse author;
 
     // 이미지 전달 될 자리
-    //private List<PostImage>
+    private List<PostImageResponse> images;
 
     // 현재 조회한 사용자가 좋아요를 했는지 여부
     private Boolean isLiked;
