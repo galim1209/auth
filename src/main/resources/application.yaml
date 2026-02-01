@@ -13,7 +13,7 @@ oauth:
     provider_name: KAKAO
     client-id: ${KAKAO_CLIENT_ID:f0bfa98dfa477735feeb8dbfdfa1d105}   # 카카오 REST API 키
     client-secret: ${KAKAO_CLIENT_SECRET:U4JgTAZGirCvVGmmnvuSlsoWlKFPstvV} # 카카오 Client Secret 키
-    redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:8070/oauth/kakao/callback}    # 카카오 인증후 백앤드에 redirect되어질 URL
+    redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:8070/api/oauth/kakao/callback}    # 카카오 인증후 백앤드에 redirect되어질 URL
 
     authorization-uri: https://kauth.kakao.com/oauth/authorize  # 카카오 인가 코드 요청 URL
     token-uri: https://kauth.kakao.com/oauth/token              # 카카오 억세스 토큰 요청 URL
@@ -40,10 +40,10 @@ spring:
     name: auth
 
   datasource:
-#    url: jdbc:mysql://localhost:3306/mannal?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-#    username: root
-#    password: 1234
-    url: ${DB_URL:jdbc:mysql://localhost:3306/mannal?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true}
+    #    url: jdbc:mysql://localhost:3306/rkfladldy?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    #    username: root
+    #    password: 1234
+    url: ${DB_URL:jdbc:mysql://localhost:3306/rkfladldy?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true}
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:1234}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -58,3 +58,9 @@ spring:
         format_sql: true
         jdbc:
           time_zone: Asia/Seoul
+
+# 파일 저장 경로 설정
+file:
+  upload:
+    dir: ${FILE_UPLOAD_DIR:./uploads}
+    base-url: ${FILE_UPLOAD_BASE_URL:http://localhost:8070/uploads}

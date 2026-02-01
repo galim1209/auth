@@ -23,6 +23,7 @@ public class LoginResponse {
         private String email;
         private String username;
         private String provider;
+        private String profileImage;
         private String role;
     }
 }

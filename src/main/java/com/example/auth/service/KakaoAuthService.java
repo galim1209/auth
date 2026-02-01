@@ -189,6 +189,7 @@ public class KakaoAuthService {
                 .email(user.getEmail())
                 .username(user.getNickName())
                 .provider(user.getProvider())
+                .profileImage(user.getProfileImage())
                 .role(user.getRole().toString())
                 .build();
 
