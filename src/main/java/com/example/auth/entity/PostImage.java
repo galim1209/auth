@@ -66,5 +66,7 @@ public class PostImage {
         res.setWidth(image.getWidth());
         res.setHeight(image.getHeight());
         res.setMediaType(image.getMediaType());
+
+        return res;
     }
 }
