@@ -1,5 +1,6 @@
 package com.example.auth.entity;
 
+import com.example.auth.dto.comment.CommentAuthorResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.*;
@@ -65,4 +66,14 @@ public class User {
 
     @Column(name = "profile_image", length = 500)
     private String profileImage;
+
+    public static CommentAuthorResponse toCommentUser(User user){
+        CommentAuthorResponse commentUser = new CommentAuthorResponse();
+        commentUser.setId(user.getId());
+        commentUser.setName(user.getNickName());
+        commentUser.setProfileImage(user.getProfileImage());
+
+        return commentUser;
+    }
+
 }

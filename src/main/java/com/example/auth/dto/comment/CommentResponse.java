@@ -16,6 +16,8 @@ public class CommentResponse {
     // 댓글 내용
     private String content;
 
+    private CommentAuthorResponse user;
+
     // 대댓글 지원을 위한 댓글의 ID
     private Long parentId;
 
