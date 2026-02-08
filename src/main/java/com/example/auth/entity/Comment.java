@@ -1,5 +1,6 @@
 package com.example.auth.entity;
 
+import com.example.auth.dto.comment.CommentResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -57,4 +58,39 @@ public class Comment {
     @UpdateTimestamp    // Hibernate가 자동으로 업데이트 시간을 수정해줌
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public void softDelete(){
+        isDeleted = true;
+    }
+
+    public static CommentResponse toCommentResponse(Comment comment){
+        CommentResponse response = new CommentResponse();
+        response.setId(comment.getId());
+        response.setContent(comment.getContent());
+        response.setUser(User.toCommentUser(comment.user));
+        response.setParentId(comment.getParent()!=null ? comment.getParent().getId() : null);
+        response.setReplyCount(comment.children.size());
+        response.setLikeCount(comment.getLikeCount());
+        response.setIsDeleted(comment.getIsDeleted());
+        response.setCreatedAt(comment.getCreatedAt());
+        response.setUpdatedAt(comment.getUpdatedAt());
+
+        return response;
+    }
+
+    public static CommentResponse toCommentResponse(Comment comment, Integer replyCount){
+        CommentResponse response = new CommentResponse();
+        response.setId(comment.getId());
+        response.setContent(comment.getContent());
+        response.setUser(User.toCommentUser(comment.user));
+        response.setParentId(comment.getParent()!=null ? comment.getParent().getId() : null);
+        response.setReplyCount(replyCount);
+        response.setLikeCount(comment.getLikeCount());
+        response.setIsDeleted(comment.getIsDeleted());
+        response.setCreatedAt(comment.getCreatedAt());
+        response.setUpdatedAt(comment.getUpdatedAt());
+
+        return response;
+    }
+
 }

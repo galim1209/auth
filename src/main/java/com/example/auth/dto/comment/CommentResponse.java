@@ -27,6 +27,8 @@ public class CommentResponse {
     private Boolean isDeleted;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    // 이 댓글에 달린 댓글들 ...
     private List<CommentResponse> replies;
 
 }

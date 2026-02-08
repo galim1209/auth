@@ -55,6 +55,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     void decrementLikeCount(@Param("postId") Long postId);
 
     // 댓글수 증가시키기
+    @Modifying
+    @Query("UPDATE Post p SET p.commentCount = p.commentCount+1 WHERE p.id = :postId")
+    void incrementCommentCount(@Param("postId") Long postId);
 
     // 댓글수 감소시키기
+    @Modifying
+    @Query("UPDATE Post p SET p.commentCount = p.commentCount+1 WHERE p.id = :postId")
+    void decrementCommentCount(@Param("postId") Long postId);
 }
