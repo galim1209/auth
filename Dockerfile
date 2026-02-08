@@ -54,7 +54,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # 2. 컨테이너로 실행하기
 # docker run -d --name auth -p 8070:8070 \
-# -e DB_URL=jdbc:mysql://host.docker.internal:3306/mannal?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true \
+# -e DB_URL=jdbc:mysql://host.docker.internal:3306/rkfladldy?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true \
 # -e DB_USERNAME=root \
 # -e DB_PASSWORD=1234 \
 # auth

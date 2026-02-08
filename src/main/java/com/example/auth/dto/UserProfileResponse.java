@@ -14,7 +14,7 @@ public class UserProfileResponse {
     // User Table의 정보
     private Long userId;
     private String email;
-    private String name;    // nick name;
+    private String name;    // nickname;
     private String profileImage; // 프로필 이미지 URL
     private String provider;
 

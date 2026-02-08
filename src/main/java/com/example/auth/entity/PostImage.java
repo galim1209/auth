@@ -57,7 +57,7 @@ public class PostImage {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public static PostImageResponse toDto(PostImage image){
+    public static PostImageResponse toDto(PostImage image) {
         PostImageResponse res = new PostImageResponse();
         res.setId(image.getId());
         res.setImageUrl(image.getImageUrl());
@@ -66,7 +66,6 @@ public class PostImage {
         res.setWidth(image.getWidth());
         res.setHeight(image.getHeight());
         res.setMediaType(image.getMediaType());
-
         return res;
     }
 }

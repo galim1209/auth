@@ -41,10 +41,13 @@ public class Comment {
     @OneToMany(mappedBy = "parent")
     private List<Comment> children = new ArrayList<>();
 
-    @Column(length = 1000)
+    @Column(name = "content", length = 1000)
     private String content;
 
+    @Column(name = "Like_count")
     private Integer likeCount;
+
+    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     @CreationTimestamp  // Hibernate가 자동으로 생성시간 설정
